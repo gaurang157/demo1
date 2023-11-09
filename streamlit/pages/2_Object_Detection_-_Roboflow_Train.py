@@ -52,10 +52,10 @@ def run_inference(workspace_id, model_id, version_number, img_path, uploaded_img
                 # Draw bounding boxes, labels, and confidence scores
                 # (you can reuse the code from the previous implementation)
 
-            st.image(frame, caption="Real-time Object Detection", use_column_width=True)
-
-            if st.button("Stop Webcam"):
-                break
+                st.image(frame, caption="Real-time Object Detection", use_column_width=True)
+    
+                if st.button("Stop Webcam"):
+                    break
 
         cap.release()
 
