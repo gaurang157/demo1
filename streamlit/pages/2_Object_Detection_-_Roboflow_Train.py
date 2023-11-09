@@ -33,12 +33,31 @@ if 'uploaded_file_od' not in st.session_state:
 ##########
 #### Set up main app logic
 ##########
-def run_inference(workspace_id, model_id, version_number, uploaded_img, inferenced_img):
-    rf = Roboflow(api_key=st.session_state['private_api_key'])
-    project = rf.workspace(workspace_id).project(model_id)
-    project_metadata = project.get_version_information()
-    version = project.version(version_number)
-    model = version.model
+def run_inference(workspace_id, model_id, version_number, img_path, uploaded_img):
+    # ... (previous code)
+
+    if st.button("Start Webcam"):
+        cap = cv2.VideoCapture(0)  # Open the webcam
+
+        while cap.isOpened():
+            ret, frame = cap.read()
+            if not ret:
+                break
+
+            # Perform inference on the webcam frame
+            predictions = model.predict(frame, confidence=int(confidence_threshold), overlap=int(overlap_threshold), stroke=int(st.session_state['box_width']))
+
+            # Process and display the frame with predictions
+            for bounding_box in predictions:
+                # Draw bounding boxes, labels, and confidence scores
+                # (you can reuse the code from the previous implementation)
+
+            st.image(frame, caption="Real-time Object Detection", use_column_width=True)
+
+            if st.button("Stop Webcam"):
+                break
+
+        cap.release()
 
     if project.type != "object-detection":
         st.write("### Please include the project URL for an object detection model trained with Roboflow Train")
