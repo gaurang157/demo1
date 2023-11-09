@@ -253,7 +253,7 @@ for bounding_box in predictions:
     end_point = (int(x1), int(y1))# bounding box end point (pt2)
 
     ## draw/place bounding boxes on image
-    cv2.rectangle(img, start_point, end_point, color=(0,0,0), thickness=-1)
+    cv2.rectangle(img, start_point, end_point, color=(143,206,0), thickness=-1)
     
 cv2.imshow('filled bounding boxes', img)"""
 
